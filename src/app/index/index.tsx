@@ -1,10 +1,10 @@
 import { colors } from '@/styles/colors';
-import { Image, TouchableOpacity, View } from 'react-native';
+import { FlatList, Image, TouchableOpacity, View } from 'react-native';
 import { styles } from './styles';
 
 import { Categories } from '@/components/categories';
+import { Link } from '@/components/link';
 import MaterialIcons from '@expo/vector-icons/MaterialIcons';
-
 export default function Index() {
   return (
 
@@ -18,6 +18,18 @@ export default function Index() {
         </TouchableOpacity>
       </View>
       <Categories />
+
+      <FlatList
+        data={['1', '2', '3']}
+        keyExtractor={(item) => item}
+        renderItem={({ item }) => (
+          <Link name='Manuel' url='https://nuelst.vercel.app' onDetails={() => console.log(`Clicou ${item}`)} />
+
+        )}
+        style={styles.link}
+        contentContainerStyle={styles.linkContent}
+        showsVerticalScrollIndicator={false}
+      />
     </View>
 
   )
