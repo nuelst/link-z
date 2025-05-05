@@ -8,14 +8,16 @@ import { styles } from "./styles";
 type CategoryProps = PressableProps & {
   //id: string,
   name: string,
-  icon: keyof typeof MaterialIcons.glyphMap
+  isSelected: boolean
+  icon: keyof typeof MaterialIcons.glyphMap //to only accept from MaterialIcons
 }
-export function Category({ name, icon, ...rest }: Readonly<CategoryProps>) {
+export function Category({ name, icon, isSelected, ...rest }: Readonly<CategoryProps>) {
+  const color = isSelected ? colors.green[300] : colors.gray[400]
   return (
     <Pressable style={styles.container} {...rest}>
-      <MaterialIcons name={icon} size={16} color={colors.gray[400]} />
+      <MaterialIcons name={icon} size={16} color={color} />
 
-      <Text style={styles.name}>{name} </Text>
+      <Text style={[styles.name, { color }]}>{name} </Text>
     </Pressable>
   )
 }
