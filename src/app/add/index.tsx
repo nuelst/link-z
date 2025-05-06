@@ -1,6 +1,7 @@
 import { Button } from "@/components/button";
 import { Categories } from "@/components/categories";
 import { Input } from "@/components/input";
+import { linkStorage } from "@/storage/link-storage";
 import { colors } from "@/styles/colors";
 import { CATEGORIES } from "@/utils/categories";
 import { MaterialIcons } from "@expo/vector-icons";
@@ -10,20 +11,36 @@ import { Alert, Text, TouchableOpacity, View } from "react-native";
 import { styles } from "./styles";
 
 export default function Add() {
+  //const router = useRouter();
   const [urlName, setUrlName] = useState('');
   const [url, setUrl] = useState('');
   const [selectedCategoryId, setSelectedCategoryId] = useState(CATEGORIES[0].id);
 
-  function handleAdd() {
-    if (!urlName.trim() || !url.trim()) {
-      Alert.alert('Please, fill in all fields');
-      return;
+  async function handleAdd() {
+    try {
+      if (!urlName.trim() || !url.trim()) {
+        Alert.alert('Ops!', 'Please, fill in all fields');
+        return;
+      }
+
+      const timestamp = Date.now().toString();
+      await linkStorage.linkSave({
+        id: timestamp,
+        name: urlName,
+        url,
+        categoryId: selectedCategoryId,
+      });
+      Alert.alert('Success!', 'Link added successfully', [
+        {
+          text: 'OK',
+          onPress: () => router.back()
+        },
+      ]);
+
+    } catch (error) {
+      Alert.alert('Ops!', 'Error adding link');
+      console.log(error);
     }
-
-
-    const selectedCategory = CATEGORIES.find(category => category.id === selectedCategoryId);
-    console.log(urlName, url);
-    console.log(`${selectedCategoryId} => ${selectedCategory?.name}`);
   }
 
   return (
