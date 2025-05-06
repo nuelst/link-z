@@ -40,12 +40,6 @@ export default function Index() {
     }
   }
 
-  // useEffect(() => {
-  //   fetchLinks();
-  // }, []);
-
-
-
   async function deleteLink() {
     try {
 

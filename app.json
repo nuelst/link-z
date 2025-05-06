@@ -13,7 +13,11 @@
       "backgroundColor": "#09090B"
     },
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "com.nuelst.linkz",
+      "infoPlist": {
+        "ITSAppUsesNonExemptEncryption": false
+      }
     },
     "android": {
       "adaptiveIcon": {
@@ -21,7 +25,8 @@
         "resizeMode": "contain",
         "backgroundColor": "#09090B"
       },
-      "edgeToEdgeEnabled": true
+      "edgeToEdgeEnabled": true,
+      "package": "com.nuelst.linkz"
     },
     "web": {
       "bundler": "metro",
@@ -33,6 +38,13 @@
     ],
     "experiments": {
       "typedRoutes": true
-    }
+    },
+    "extra": {
+      "router": {},
+      "eas": {
+        "projectId": "6201fe40-bda9-454d-bf79-9b2e30ab7800"
+      }
+    },
+    "owner": "nuelst"
   }
 }
