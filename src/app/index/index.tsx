@@ -1,9 +1,10 @@
 import { colors } from '@/styles/colors';
-import { FlatList, Image, TouchableOpacity, View } from 'react-native';
+import { FlatList, Image, Modal, Text, TouchableOpacity, View } from 'react-native';
 import { styles } from './styles';
 
 import { Categories } from '@/components/categories';
 import { Link } from '@/components/link';
+import { Option } from '@/components/option/indext';
 import MaterialIcons from '@expo/vector-icons/MaterialIcons';
 export default function Index() {
   return (
@@ -30,6 +31,28 @@ export default function Index() {
         contentContainerStyle={styles.linkContent}
         showsVerticalScrollIndicator={false}
       />
+      <Modal transparent>
+        <View style={styles.modal}>
+          <View style={styles.modalContent}>
+            <View style={styles.modalHeader}>
+              <Text style={styles.modalCategory}> Course</Text>
+              <TouchableOpacity>
+
+                <MaterialIcons name='close' size={20} color={colors.gray[400]} />
+              </TouchableOpacity>
+            </View>
+            <Text style={styles.modalLinkName}>Manuel</Text>
+            <Text style={styles.modalUrl}>https://nuelst.vercel.app</Text>
+            <View style={styles.modalFooter}>
+              <Option name='Delete' icon='delete' variant='secondary' />
+              <Option name='Open' icon='language' />
+            </View>
+
+          </View>
+        </View>
+
+
+      </Modal>
     </View>
 
   )
