@@ -1,5 +1,5 @@
 import { colors } from '@/styles/colors';
-import { Alert, FlatList, Image, Modal, Text, TouchableOpacity, View } from 'react-native';
+import { Alert, FlatList, Image, Linking, Modal, Text, TouchableOpacity, View } from 'react-native';
 import { styles } from './styles';
 
 import { Categories } from '@/components/categories';
@@ -65,6 +65,17 @@ export default function Index() {
     ]);
   }
 
+  async function handleOpenLink() {
+    try {
+      await Linking.openURL(selectedLink.url);
+      setShowModal(false);
+    } catch (error) {
+      Alert.alert('Ops!', 'Error opening link');
+      console.log(error);
+    }
+  }
+
+
   useFocusEffect(useCallback(() => {
     fetchLinks();
   }, [selectedCategoryId]));
@@ -108,7 +119,7 @@ export default function Index() {
             <Text style={styles.modalUrl}>{selectedLink.url}</Text>
             <View style={styles.modalFooter}>
               <Option name='Delete' icon='delete' variant='secondary' onPress={handleDelete} />
-              <Option name='Open' icon='language' />
+              <Option name='Open' icon='language' onPress={handleOpenLink} />
             </View>
 
           </View>
