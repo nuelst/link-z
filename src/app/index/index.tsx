@@ -5,10 +5,13 @@ import { styles } from './styles';
 import { Categories } from '@/components/categories';
 import { Link } from '@/components/link';
 import { Option } from '@/components/option';
+import { CATEGORIES } from '@/utils/categories';
 import MaterialIcons from '@expo/vector-icons/MaterialIcons';
 import { useRouter } from 'expo-router';
+import { useState } from 'react';
 export default function Index() {
   const router = useRouter();
+  const [selectedCategoryId, setSelectedCategoryId] = useState(CATEGORIES[0].id);
   return (
 
     <View style={styles.container}>
@@ -21,7 +24,7 @@ export default function Index() {
           <MaterialIcons name='add' size={32} color={colors.green[300]} />
         </TouchableOpacity>
       </View>
-      <Categories />
+      <Categories selectedCategoryId={selectedCategoryId} onSelect={setSelectedCategoryId} />
 
       <FlatList
         data={['1', '2', '3']}
